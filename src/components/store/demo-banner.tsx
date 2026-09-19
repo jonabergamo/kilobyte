@@ -21,7 +21,7 @@ export function DemoBanner() {
   return (
     <div className="bg-note text-note-foreground text-sm">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2 sm:px-6">
-        <p className="min-w-60 flex-1"><span className="font-medium">{t.banner.title}</span> {t.banner.body}</p>
+        <p className="min-w-40 flex-1"><span className="font-medium">{t.banner.title}</span> <span className="hidden sm:inline">{t.banner.body}</span></p>
         <a href={LINKS.repo} target="_blank" rel="noreferrer" className="font-medium underline-offset-4 hover:underline">{t.banner.code}</a>
         <a href={LINKS.portfolio} target="_blank" rel="noreferrer" className="font-medium underline-offset-4 hover:underline">{t.banner.more}</a>
         <Button size="icon" variant="ghost" className="size-7 hover:bg-black/10 hover:text-note-foreground" aria-label={t.banner.close} onClick={() => { try { localStorage.setItem("kb.banner", "off") } catch {} ; listeners.forEach((fn) => fn()) }}>
