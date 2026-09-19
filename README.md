@@ -4,7 +4,7 @@ An electronics store that works end to end. Browse laptops, components and perip
 
 I built the first version in 2023 as a college project, a Django API and a Next 13 front end called Informática that had a cart and a checkout button that only decremented stock. In 2026 I kept the repo, renamed it and rebuilt it as a real store.
 
-Demo at https://kilobyte.vercel.app. One click logins for a customer and for the manager on the sign in page. Pay with card `4242 4242 4242 4242`, any future date, any CVC.
+Demo at https://kilobyte-rho.vercel.app. One click logins for a customer and for the manager on the sign in page. Pay with card `4242 4242 4242 4242`, any future date, any CVC.
 
 ## How it works
 
