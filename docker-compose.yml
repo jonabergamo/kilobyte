@@ -1,0 +1,15 @@
+# local database only. the app runs with pnpm dev
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: kilobyte
+      POSTGRES_PASSWORD: kilobyte
+      POSTGRES_DB: kilobyte
+    ports:
+      - "5436:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
