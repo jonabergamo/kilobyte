@@ -156,6 +156,7 @@ export async function seed() {
   let n = 0
   for (const o of past) {
     const rows = await db.select().from(products).where(inArray(products.id, o.items.map(([id]) => id)))
+    const pics = await db.select().from(productImages).where(inArray(productImages.productId, o.items.map(([id]) => id)))
     const lines = o.items.map(([id, qty]) => {
       const p = rows.find((r) => r.id === id)!
       return { product: p, qty, unitCents: p.promoPriceCents ?? p.priceCents }
@@ -176,7 +177,9 @@ export async function seed() {
         paidAt: at,
       })
       .returning()
-    await db.insert(orderItems).values(lines.map((l) => ({ orderId: order.id, productId: l.product.id, name: l.product.name, unitCents: l.unitCents, qty: l.qty })))
+    await db.insert(orderItems).values(
+      lines.map((l) => ({ orderId: order.id, productId: l.product.id, name: l.product.name, imageUrl: pics.find((i) => i.productId === l.product.id)?.url ?? null, unitCents: l.unitCents, qty: l.qty })),
+    )
     const steps = ["paid", "packing", "shipped", "delivered"] as const
     const upto = steps.indexOf(o.status as (typeof steps)[number])
     await db.insert(orderEvents).values(
