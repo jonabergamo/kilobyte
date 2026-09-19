@@ -2,7 +2,6 @@ import { and, desc, eq, sql } from "drizzle-orm"
 import { db } from "@/db"
 import { cartItems, carts, coupons, orderEvents, orderItems, orders, products, type Address, type OrderStatus } from "@/db/schema"
 import { stripe, siteUrl } from "./stripe"
-import { NEXT } from "./status"
 import type { Cart } from "./cart"
 
 export { NEXT } from "./status"

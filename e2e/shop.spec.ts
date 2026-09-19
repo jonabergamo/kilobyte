@@ -4,7 +4,7 @@ import { expect, test } from "@playwright/test"
 test("a guest fills a cart, signs in, pays and sees the order", async ({ page }) => {
   await page.goto("/p/ryzen-5-7600")
   await page.getByRole("button", { name: "Add to cart", exact: true }).first().click()
-  await expect(page.locator("header span.bg-primary")).toHaveText("1")
+  await expect(page.locator("header span.bg-hot")).toHaveText("1")
 
   await page.goto("/cart")
   await page.fill("input[placeholder='Coupon code']", "BEMVINDO10")
@@ -22,7 +22,7 @@ test("a guest fills a cart, signs in, pays and sees the order", async ({ page })
   await page.click("form button[type=submit]")
   await expect(page).toHaveURL(/\/checkout\/success/)
   await expect(page.getByText("Payment confirmed")).toBeVisible({ timeout: 20_000 })
-  await expect(page.locator("header span.bg-primary")).toHaveCount(0)
+  await expect(page.locator("header span.bg-hot")).toHaveCount(0)
 
   await page.click("a:has-text('View order')")
   await expect(page.locator("ol li")).toHaveCount(4)

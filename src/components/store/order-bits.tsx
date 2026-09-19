@@ -8,11 +8,11 @@ import { useT, intlTag } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
 
 const tone: Record<OrderStatus, string> = {
-  pending: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
+  pending: "bg-note text-note-foreground",
   paid: "bg-sky-500/15 text-sky-700 dark:text-sky-400",
   packing: "bg-violet-500/15 text-violet-700 dark:text-violet-400",
   shipped: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-400",
-  delivered: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+  delivered: "bg-good/15 text-good",
   cancelled: "bg-muted text-muted-foreground",
 }
 
@@ -24,7 +24,7 @@ export function StatusBadge({ status }: { status: OrderStatus }) {
 export function OrderRow({ order: o }: { order: Order & { items: OrderItem[] } }) {
   const { t, locale } = useT()
   return (
-    <div className="bg-card hover:bg-muted/60 flex flex-wrap items-center gap-3 rounded-xl border px-4 py-3 text-sm">
+    <div className="bg-card flex flex-wrap items-center gap-3 rounded-xl px-4 py-3 text-sm shadow-sm transition-shadow hover:shadow-md">
       <div className="flex -space-x-2">
         {o.items.slice(0, 3).map((i) => (
           <div key={i.id} className="bg-muted relative size-10 overflow-hidden rounded-md border">{i.imageUrl && <Image src={i.imageUrl} alt="" fill sizes="40px" className="object-cover" />}</div>
@@ -56,8 +56,8 @@ export function Timeline({ events, status }: { events: OrderEvent[]; status: Ord
         return (
           <li key={s} className="space-y-1 text-xs">
             <div className="flex items-center gap-1">
-              <span className={cn("flex size-5 items-center justify-center rounded-full border", done ? "bg-emerald-500 border-emerald-500 text-white" : "text-transparent")}><Check className="size-3" /></span>
-              <span className={cn("h-px flex-1", i < reached ? "bg-emerald-500" : "bg-border")} />
+              <span className={cn("flex size-5 items-center justify-center rounded-full border", done ? "bg-good border-good text-white" : "text-transparent")}><Check className="size-3" /></span>
+              <span className={cn("h-px flex-1", i < reached ? "bg-good" : "bg-border")} />
             </div>
             <p className={cn("font-medium", !done && "text-muted-foreground")}>{t.status[s]}</p>
             {ev && <p className="text-muted-foreground">{ev.at.toLocaleDateString(intlTag[locale])}{ev.note && <><br />{ev.note}</>}</p>}

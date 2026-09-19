@@ -8,15 +8,16 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { setQty, type Cart } from "@/lib/cart"
 import { brl } from "@/lib/pricing"
 import { useT, intlTag } from "@/lib/i18n"
+import { onBrand } from "./header-client"
 
 export function CartSheet({ cart }: { cart: Cart }) {
   const { t, locale } = useT()
   const money = (c: number) => brl(c, intlTag[locale])
   return (
     <Sheet>
-      <SheetTrigger render={<Button variant="ghost" size="icon" className="relative" aria-label={t.nav.cart} />}>
+      <SheetTrigger render={<Button variant="ghost" size="icon" className={`${onBrand} relative`} aria-label={t.nav.cart} />}>
         <ShoppingCart className="size-5" />
-        {cart.count > 0 && <span className="bg-primary text-primary-foreground absolute -top-0.5 -right-0.5 flex size-4.5 items-center justify-center rounded-full text-[10px] font-semibold">{cart.count}</span>}
+        {cart.count > 0 && <span className="bg-hot text-hot-foreground absolute -top-0.5 -right-0.5 flex size-4.5 items-center justify-center rounded-full text-[10px] font-semibold">{cart.count}</span>}
       </SheetTrigger>
       <SheetContent className="flex w-full flex-col sm:max-w-md">
         <SheetHeader>
@@ -34,7 +35,7 @@ export function CartSheet({ cart }: { cart: Cart }) {
               {cart.discountCents > 0 && <Row label={t.cart.discount} value={`- ${money(cart.discountCents)}`} />}
               <Row label={t.cart.shipping} value={cart.shippingCents === 0 ? t.cart.free : money(cart.shippingCents)} />
               <Row label={t.cart.total} value={money(cart.totalCents)} bold />
-              <Button className="mt-2 w-full" nativeButton={false} render={<Link href="/cart" />}>{t.cart.checkout}</Button>
+              <Button className="mt-2 w-full" size="lg" nativeButton={false} render={<Link href="/cart" />}>{t.cart.checkout}</Button>
             </div>
           </>
         )}

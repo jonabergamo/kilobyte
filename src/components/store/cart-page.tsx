@@ -19,11 +19,11 @@ export function CartPage({ cart }: { cart: Cart }) {
     <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
       <div>
         <h1 className="mb-4 text-2xl font-semibold tracking-tight">{t.cart.title} <span className="text-muted-foreground text-base font-normal">· {t.cart.items(cart.count)}</span></h1>
-        <ul className="divide-y rounded-xl border px-4">
+        <ul className="bg-card divide-y rounded-xl px-4 shadow-sm">
           {cart.lines.map((l) => <div key={l.productId} className="py-4"><Line line={l} /></div>)}
         </ul>
       </div>
-      <aside className="bg-card space-y-4 self-start rounded-xl border p-5 text-sm lg:sticky lg:top-20">
+      <aside className="bg-card space-y-4 self-start rounded-xl p-5 text-sm shadow-sm lg:sticky lg:top-20">
         <form
           className="flex gap-2"
           onSubmit={(e) => {
@@ -39,7 +39,7 @@ export function CartPage({ cart }: { cart: Cart }) {
           <Button type="submit" variant="outline" disabled={busy || !code.trim()}>{t.cart.apply}</Button>
         </form>
         {cart.coupon && (
-          <p className="flex items-center justify-between rounded-md bg-emerald-500/10 px-3 py-2 text-emerald-700 dark:text-emerald-400">
+          <p className="bg-good/10 text-good flex items-center justify-between rounded-md px-3 py-2">
             <span className="font-mono">{cart.coupon.code}</span>
             <button type="button" className="text-xs underline-offset-4 hover:underline" onClick={() => start(() => removeCoupon())}>{t.cart.remove}</button>
           </p>
@@ -51,7 +51,7 @@ export function CartPage({ cart }: { cart: Cart }) {
           {missing > 0 && cart.shippingCents > 0 && <p className="text-muted-foreground text-xs">{t.cart.freeShippingHint(money(missing))}</p>}
           <Row label={t.cart.total} value={money(cart.totalCents)} bold />
         </div>
-        <Button className="w-full" size="lg" nativeButton={false} render={<Link href="/checkout" />}>{t.cart.checkout}</Button>
+        <Button className="w-full font-semibold" size="lg" nativeButton={false} render={<Link href="/checkout" />}>{t.cart.checkout}</Button>
         <Link href="/search" className="text-muted-foreground block text-center text-xs underline-offset-4 hover:underline">{t.cart.keepShopping}</Link>
       </aside>
     </div>

@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <ul className="space-y-4">
             {p.reviews.length === 0 && <li className="text-muted-foreground text-sm"><T k="product.noReviews" /></li>}
             {p.reviews.map((r) => (
-              <li key={r.id} className="bg-card rounded-xl border p-4">
+              <li key={r.id} className="bg-card rounded-xl p-4 shadow-sm">
                 <div className="flex items-center justify-between gap-2">
                   <Stars ratingX100={r.rating * 100} />
                   <span className="text-muted-foreground text-xs">{r.user.name} · {r.createdAt.toLocaleDateString()}</span>

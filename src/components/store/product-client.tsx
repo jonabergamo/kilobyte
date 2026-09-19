@@ -18,13 +18,13 @@ export function Gallery({ images, name }: { images: ProductImage[]; name: string
   const cur = images[i] ?? images[0]
   return (
     <div className="space-y-2">
-      <div className="bg-muted/40 relative aspect-square overflow-hidden rounded-2xl border">
+      <div className="bg-card relative aspect-square overflow-hidden rounded-2xl shadow-sm">
         {cur && <Image src={cur.url} alt={cur.alt || name} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />}
       </div>
       {images.length > 1 && (
         <div className="flex gap-2">
           {images.map((im, k) => (
-            <button key={im.id} type="button" onClick={() => setI(k)} className={cn("bg-muted/40 relative size-16 overflow-hidden rounded-md border", k === i && "ring-primary ring-2")}>
+            <button key={im.id} type="button" onClick={() => setI(k)} className={cn("bg-card relative size-16 overflow-hidden rounded-md shadow-sm", k === i && "ring-primary ring-2")}>
               <Image src={im.url} alt="" fill sizes="64px" className="object-cover" />
             </button>
           ))}
@@ -43,7 +43,7 @@ export function BuyBox({ productId, stock, saved, signedIn }: { productId: numbe
   const out = stock <= 0
   return (
     <div className="space-y-3">
-      <p className={cn("text-sm font-medium", out ? "text-destructive" : stock <= 5 ? "text-amber-600" : "text-emerald-600")}>
+      <p className={cn("text-sm font-medium", out ? "text-destructive" : stock <= 5 ? "text-hot" : "text-good")}>
         {out ? t.product.outOfStock : stock <= 5 ? t.product.lowStock(stock) : t.product.inStock}
       </p>
       <div className="flex flex-wrap gap-2">
@@ -52,7 +52,7 @@ export function BuyBox({ productId, stock, saved, signedIn }: { productId: numbe
           <span className="w-8 text-center tabular-nums">{qty}</span>
           <Button size="icon" variant="ghost" disabled={qty >= stock} onClick={() => setQty((q) => q + 1)} aria-label="+"><Plus className="size-4" /></Button>
         </div>
-        <Button size="lg" disabled={out || busy} onClick={() => start(async () => { await addToCart(productId, qty); toast.success(t.product.added) })}>
+        <Button size="lg" variant="hot" className="px-5 font-semibold" disabled={out || busy} onClick={() => start(async () => { await addToCart(productId, qty); toast.success(t.product.added) })}>
           <ShoppingCart className="size-4" /> {t.product.addToCart}
         </Button>
         <Button
@@ -71,7 +71,7 @@ export function BuyBox({ productId, stock, saved, signedIn }: { productId: numbe
             })
           }
         >
-          <Heart className={cn("size-4", isSaved && "fill-current text-rose-500")} />
+          <Heart className={cn("size-4", isSaved && "fill-current text-hot")} />
         </Button>
       </div>
     </div>
@@ -85,10 +85,10 @@ export function ReviewForm({ productId, allowed }: { productId: number; allowed:
   const [title, setTitle] = useState("")
   const [body, setBody] = useState("")
   const [busy, start] = useTransition()
-  if (!allowed) return <p className="text-muted-foreground bg-card self-start rounded-xl border p-4 text-sm">{t.product.reviewHint}</p>
+  if (!allowed) return <p className="text-muted-foreground bg-card self-start rounded-xl p-4 text-sm shadow-sm">{t.product.reviewHint}</p>
   return (
     <form
-      className="bg-card space-y-3 self-start rounded-xl border p-4"
+      className="bg-card space-y-3 self-start rounded-xl p-4 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault()
         start(async () => {

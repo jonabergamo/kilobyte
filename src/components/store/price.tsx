@@ -13,7 +13,7 @@ export function Price({ cents, promo, className, big = false }: { cents: number;
       {sale && (
         <>
           <span className="text-muted-foreground text-sm line-through tabular-nums">{brl(cents, intlTag[locale])}</span>
-          <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400">{t.product.off(pct)}</span>
+          <span className="bg-hot text-hot-foreground rounded-full px-2 py-0.5 text-xs font-semibold">{t.product.off(pct)}</span>
         </>
       )}
     </span>

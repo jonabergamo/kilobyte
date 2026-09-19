@@ -31,7 +31,7 @@ export function Filters({ tree, brands, params }: { tree: CategoryNode[]; brands
   const onCategoryPage = pathname.startsWith("/c/")
   const active = Object.keys(params).some((k) => ["brand", "min", "max", "inStock"].includes(k) && params[k])
   return (
-    <aside className="space-y-6 text-sm lg:sticky lg:top-20 lg:self-start">
+    <aside className="bg-card space-y-6 rounded-xl p-4 text-sm shadow-sm lg:sticky lg:top-20 lg:self-start">
       <div className="flex items-center justify-between">
         <h2 className="font-semibold">{t.search.filters}</h2>
         {active && <button type="button" className="text-muted-foreground text-xs underline-offset-4 hover:underline" onClick={() => set({ brand: undefined, min: undefined, max: undefined, inStock: undefined })}>{t.search.clear}</button>}
@@ -88,7 +88,7 @@ export function SortSelect({ value }: { value: Sort }) {
   return (
     <label className="flex items-center gap-2 text-sm">
       <span className="text-muted-foreground">{t.search.sort}</span>
-      <select value={value} onChange={(e) => set({ sort: e.target.value })} className="bg-background h-9 rounded-md border px-2 text-sm">
+      <select value={value} onChange={(e) => set({ sort: e.target.value })} className="bg-card h-9 rounded-md border px-2 text-sm shadow-sm">
         {Object.entries(t.search.sorts).map(([k, label]) => <option key={k} value={k}>{label}</option>)}
       </select>
     </label>

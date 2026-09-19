@@ -46,7 +46,7 @@ const PRODUCTS: P[] = [
   ["Memory", "Kingston", "FURY Beast DDR5 32GB (2x16) 6000MHz", 74900, 69900, 25, "1562976540-1502c2145186", { Capacity: "32 GB (2x16)", Speed: "6000 MT/s", Latency: "CL36", Voltage: "1.35 V" }],
   ["Memory", "Corsair", "Vengeance DDR5 64GB (2x32) 5600MHz", 139900, null, 7, "1541029071515-84cc54f84dc5", { Capacity: "64 GB (2x32)", Speed: "5600 MT/s", Latency: "CL40" }],
   ["Memory", "Kingston", "FURY Beast DDR4 16GB (2x8) 3200MHz", 32900, 29900, 40, "1562976540-1502c2145186", { Capacity: "16 GB (2x8)", Speed: "3200 MT/s", Latency: "CL16" }],
-  ["Storage", "Samsung", "990 PRO NVMe 2TB", 109900, 99900, 15, "1597848212624-a19eb35e2651", { Capacity: "2 TB", Interface: "PCIe 4.0 x4", Read: "7450 MB/s", Write: "6900 MB/s" }],
+  ["Storage", "Samsung", "990 PRO NVMe 2TB", 109900, 99900, 15, "1531492746076-161ca9bcad58", { Capacity: "2 TB", Interface: "PCIe 4.0 x4", Read: "7450 MB/s", Write: "6900 MB/s" }],
   ["Storage", "Kingston", "NV3 NVMe 1TB", 39900, null, 33, "1531492746076-161ca9bcad58", { Capacity: "1 TB", Interface: "PCIe 4.0 x4", Read: "6000 MB/s" }],
   ["Storage", "Samsung", "870 EVO SATA 1TB", 49900, 44900, 20, "1531492746076-161ca9bcad58", { Capacity: "1 TB", Interface: "SATA III", Read: "560 MB/s" }],
   ["Storage", "Samsung", "T7 Shield portable SSD 2TB", 89900, null, 12, "1618410320928-25228d811631", { Capacity: "2 TB", Interface: "USB 3.2 Gen 2", Rating: "IP65" }],

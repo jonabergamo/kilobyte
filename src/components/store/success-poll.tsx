@@ -29,7 +29,7 @@ export function SuccessPoll({ sessionId }: { sessionId: string }) {
   }, [paid, router])
   return (
     <div className="mx-auto max-w-lg space-y-6 py-12 text-center">
-      {paid ? <CheckCircle2 className="mx-auto size-14 text-emerald-500" /> : <Loader2 className="text-muted-foreground mx-auto size-12 animate-spin" />}
+      {paid ? <CheckCircle2 className="mx-auto size-14 text-good" /> : <Loader2 className="text-muted-foreground mx-auto size-12 animate-spin" />}
       <h1 className="text-2xl font-semibold tracking-tight">{t.checkout.successTitle}</h1>
       <p className="text-muted-foreground">{paid ? t.checkout.paid : t.checkout.waiting}</p>
       {q.data && (

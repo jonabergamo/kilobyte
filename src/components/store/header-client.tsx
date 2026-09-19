@@ -9,7 +9,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { logout } from "@/lib/actions"
 import type { CategoryNode } from "@/lib/catalog"
 import { useT } from "@/lib/i18n"
+import { cn } from "@/lib/utils"
 import { LangToggle, ThemeToggle } from "./toggles"
+
+export const onBrand = "text-brand-foreground hover:bg-white/10 hover:text-brand-foreground aria-expanded:bg-white/10 aria-expanded:text-brand-foreground"
 
 type User = { name?: string | null; role: "customer" | "manager" } | null
 
@@ -25,7 +28,7 @@ export function HeaderClient({ tree, user }: { tree: CategoryNode[]; user: User 
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant="ghost" className="hidden md:inline-flex" />}>
+        <DropdownMenuTrigger render={<Button variant="ghost" className={cn(onBrand, "hidden md:inline-flex")} />}>
           {t.nav.categories} <ChevronDown className="size-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-64">
@@ -42,14 +45,14 @@ export function HeaderClient({ tree, user }: { tree: CategoryNode[]; user: User 
       </DropdownMenu>
       <form onSubmit={submit} className="relative flex-1">
         <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
-        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t.nav.search} className="pl-9" aria-label={t.nav.search} />
+        <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t.nav.search} className="bg-card text-foreground h-10 rounded-full border-transparent pl-9 shadow-sm" aria-label={t.nav.search} />
       </form>
       <div className="hidden items-center sm:flex">
-        <LangToggle />
-        <ThemeToggle />
+        <LangToggle className={onBrand} />
+        <ThemeToggle className={onBrand} />
       </div>
       <DropdownMenu>
-        <DropdownMenuTrigger render={<Button variant="ghost" size="icon" aria-label={t.nav.account} />}>
+        <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className={onBrand} aria-label={t.nav.account} />}>
           <UserRound className="size-5" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-52">
