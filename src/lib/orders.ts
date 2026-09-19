@@ -1,10 +1,11 @@
 import { and, desc, eq, sql } from "drizzle-orm"
 import { db } from "@/db"
-import { cartItems, coupons, orderEvents, orderItems, orders, products, type Address, type OrderStatus } from "@/db/schema"
+import { cartItems, carts, coupons, orderEvents, orderItems, orders, products, type Address, type OrderStatus } from "@/db/schema"
 import { stripe, siteUrl } from "./stripe"
+import { NEXT } from "./status"
 import type { Cart } from "./cart"
 
-export const NEXT: Partial<Record<OrderStatus, OrderStatus>> = { paid: "packing", packing: "shipped", shipped: "delivered" }
+export { NEXT } from "./status"
 
 async function nextNumber() {
   const year = new Date().getFullYear()
@@ -73,7 +74,9 @@ export async function markPaid(sessionId: string, paymentIntent: string | null, 
       if (item.productId) await tx.update(products).set({ stock: sql`greatest(${products.stock} - ${item.qty}, 0)` }).where(eq(products.id, item.productId))
     }
     if (order.couponId) await tx.update(coupons).set({ uses: sql`${coupons.uses} + 1` }).where(eq(coupons.id, order.couponId))
-    if (cartId) await tx.delete(cartItems).where(eq(cartItems.cartId, cartId))
+    // the cart that paid, or failing that whatever cart the buyer owns now
+    const cart = cartId ?? (await tx.query.carts.findFirst({ where: eq(carts.userId, order.userId) }))?.id
+    if (cart) await tx.delete(cartItems).where(eq(cartItems.cartId, cart))
   })
   return { ...order, status: "paid" as const }
 }

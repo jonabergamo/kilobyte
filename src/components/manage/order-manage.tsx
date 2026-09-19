@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { StatusBadge, Timeline } from "@/components/store/order-bits"
 import { Money } from "@/components/store/money"
 import type { orderByNumber } from "@/lib/orders"
-import { NEXT } from "@/lib/orders"
+import { NEXT } from "@/lib/status"
 import { advanceOrder, cancelOrder } from "@/lib/manage"
 import { useT } from "@/lib/i18n"
 

@@ -10,7 +10,7 @@ export default async function Cart() {
     return (
       <div className="flex flex-col items-start gap-4 rounded-xl border border-dashed p-10">
         <p className="text-muted-foreground"><T k="cart.empty" /></p>
-        <Button render={<Link href="/search" />}><T k="cart.keepShopping" /></Button>
+        <Button nativeButton={false} render={<Link href="/search" />}><T k="cart.keepShopping" /></Button>
       </div>
     )
   }

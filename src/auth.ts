@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs"
 import { eq } from "drizzle-orm"
 import { db } from "@/db"
 import { users } from "@/db/schema"
+import { authConfig } from "./auth.config"
 
 declare module "next-auth" {
   interface Session {
@@ -15,8 +16,7 @@ declare module "next-auth" {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  session: { strategy: "jwt" },
-  pages: { signIn: "/login" },
+  ...authConfig,
   providers: [
     Credentials({
       credentials: { email: {}, password: {} },
@@ -28,20 +28,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.role = user.role
-        token.uid = user.id
-      }
-      return token
-    },
-    session({ session, token }) {
-      session.user.id = token.uid as string
-      session.user.role = token.role as "customer" | "manager"
-      return session
-    },
-  },
 })
 
 // the numeric id the database wants, or null when nobody is signed in

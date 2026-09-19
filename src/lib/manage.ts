@@ -5,7 +5,8 @@ import { db } from "@/db"
 import { brands, categories, coupons, orderItems, orders, productImages, products, reviews, users, type OrderStatus } from "@/db/schema"
 import { requireManager } from "@/auth"
 import { refreshRating } from "@/db/seed"
-import { moveOrder, NEXT } from "./orders"
+import { moveOrder } from "./orders"
+import { NEXT } from "./status"
 import { stripe } from "./stripe"
 
 const slugify = (s: string) =>

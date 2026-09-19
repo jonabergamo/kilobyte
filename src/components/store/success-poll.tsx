@@ -1,5 +1,7 @@
 "use client"
 import Link from "next/link"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { CheckCircle2, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -20,6 +22,11 @@ export function SuccessPoll({ sessionId }: { sessionId: string }) {
     retryDelay: 1500,
   })
   const paid = q.data?.status === "paid"
+  const router = useRouter()
+  // the header was rendered before the payment settled, so the cart badge needs a refresh
+  useEffect(() => {
+    if (paid) router.refresh()
+  }, [paid, router])
   return (
     <div className="mx-auto max-w-lg space-y-6 py-12 text-center">
       {paid ? <CheckCircle2 className="mx-auto size-14 text-emerald-500" /> : <Loader2 className="text-muted-foreground mx-auto size-12 animate-spin" />}
@@ -29,8 +36,8 @@ export function SuccessPoll({ sessionId }: { sessionId: string }) {
         <p className="font-mono text-sm">{t.checkout.orderNumber} {q.data.number}</p>
       )}
       <div className="flex justify-center gap-2">
-        {q.data && <Button render={<Link href={`/account/orders/${q.data.number}`} />}>{t.checkout.viewOrder}</Button>}
-        <Button variant="outline" render={<Link href="/search" />}>{t.cart.keepShopping}</Button>
+        {q.data && <Button nativeButton={false} render={<Link href={`/account/orders/${q.data.number}`} />}>{t.checkout.viewOrder}</Button>}
+        <Button variant="outline" nativeButton={false} render={<Link href="/search" />}>{t.cart.keepShopping}</Button>
       </div>
     </div>
   )

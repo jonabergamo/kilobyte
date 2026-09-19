@@ -31,9 +31,9 @@ export function HeaderClient({ tree, user }: { tree: CategoryNode[]; user: User 
         <DropdownMenuContent align="start" className="w-64">
           {tree.map((c) => (
             <div key={c.id}>
-              <DropdownMenuItem render={<Link href={`/c/${c.slug}`} />} className="font-medium">{c.name}</DropdownMenuItem>
+              <DropdownMenuItem nativeButton={false} render={<Link href={`/c/${c.slug}`} />} className="font-medium">{c.name}</DropdownMenuItem>
               {c.children.map((k) => (
-                <DropdownMenuItem key={k.id} render={<Link href={`/c/${k.slug}`} />} className="text-muted-foreground pl-6">{k.name}</DropdownMenuItem>
+                <DropdownMenuItem key={k.id} nativeButton={false} render={<Link href={`/c/${k.slug}`} />} className="text-muted-foreground pl-6">{k.name}</DropdownMenuItem>
               ))}
               <DropdownMenuSeparator />
             </div>
@@ -56,13 +56,13 @@ export function HeaderClient({ tree, user }: { tree: CategoryNode[]; user: User 
           {user ? (
             <>
               <div className="text-muted-foreground truncate px-2 py-1.5 text-xs">{user.name}</div>
-              <DropdownMenuItem render={<Link href="/account" />}>{t.account.orders}</DropdownMenuItem>
-              <DropdownMenuItem render={<Link href="/account/wishlist" />}>{t.nav.wishlist}</DropdownMenuItem>
-              <DropdownMenuItem render={<Link href="/account/settings" />}>{t.account.settings}</DropdownMenuItem>
+              <DropdownMenuItem nativeButton={false} render={<Link href="/account" />}>{t.account.orders}</DropdownMenuItem>
+              <DropdownMenuItem nativeButton={false} render={<Link href="/account/wishlist" />}>{t.nav.wishlist}</DropdownMenuItem>
+              <DropdownMenuItem nativeButton={false} render={<Link href="/account/settings" />}>{t.account.settings}</DropdownMenuItem>
               {user.role === "manager" && (
                 <>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem render={<Link href="/manage" />} className="font-medium">{t.nav.manage}</DropdownMenuItem>
+                  <DropdownMenuItem nativeButton={false} render={<Link href="/manage" />} className="font-medium">{t.nav.manage}</DropdownMenuItem>
                 </>
               )}
               <DropdownMenuSeparator />
@@ -70,8 +70,8 @@ export function HeaderClient({ tree, user }: { tree: CategoryNode[]; user: User 
             </>
           ) : (
             <>
-              <DropdownMenuItem render={<Link href="/login" />}>{t.nav.signIn}</DropdownMenuItem>
-              <DropdownMenuItem render={<Link href="/register" />}>{t.auth.register}</DropdownMenuItem>
+              <DropdownMenuItem nativeButton={false} render={<Link href="/login" />}>{t.nav.signIn}</DropdownMenuItem>
+              <DropdownMenuItem nativeButton={false} render={<Link href="/register" />}>{t.auth.register}</DropdownMenuItem>
             </>
           )}
           <DropdownMenuSeparator className="sm:hidden" />

@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server"
-import { auth } from "@/auth"
+import NextAuth from "next-auth"
+import { authConfig } from "@/auth.config"
+
+const { auth } = NextAuth(authConfig)
 
 // /manage is for managers, /account for anyone signed in. everything else is public
 export default auth((req) => {

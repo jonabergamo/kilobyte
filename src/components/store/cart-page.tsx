@@ -51,7 +51,7 @@ export function CartPage({ cart }: { cart: Cart }) {
           {missing > 0 && cart.shippingCents > 0 && <p className="text-muted-foreground text-xs">{t.cart.freeShippingHint(money(missing))}</p>}
           <Row label={t.cart.total} value={money(cart.totalCents)} bold />
         </div>
-        <Button className="w-full" size="lg" render={<Link href="/checkout" />}>{t.cart.checkout}</Button>
+        <Button className="w-full" size="lg" nativeButton={false} render={<Link href="/checkout" />}>{t.cart.checkout}</Button>
         <Link href="/search" className="text-muted-foreground block text-center text-xs underline-offset-4 hover:underline">{t.cart.keepShopping}</Link>
       </aside>
     </div>

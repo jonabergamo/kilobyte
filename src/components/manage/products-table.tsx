@@ -20,7 +20,7 @@ export function ProductsTable({ rows, q }: { rows: Awaited<ReturnType<typeof lis
         <h1 className="text-2xl font-semibold tracking-tight">{t.manage.products} <span className="text-muted-foreground text-base font-normal">({rows.length})</span></h1>
         <div className="flex gap-2">
           <Input defaultValue={q} placeholder={t.manage.search} className="w-56" onKeyDown={(e) => e.key === "Enter" && router.push(`/manage/products?q=${encodeURIComponent(e.currentTarget.value)}`)} />
-          <Button render={<Link href="/manage/products/new" />}><Plus className="size-4" /> {t.manage.newProduct}</Button>
+          <Button nativeButton={false} render={<Link href="/manage/products/new" />}><Plus className="size-4" /> {t.manage.newProduct}</Button>
         </div>
       </div>
       <div className="bg-card overflow-x-auto rounded-xl border">

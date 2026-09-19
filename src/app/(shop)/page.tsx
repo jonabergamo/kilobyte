@@ -17,8 +17,8 @@ export default async function Home() {
           <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl"><T k="home.hero" /></h1>
           <p className="text-muted-foreground max-w-md text-lg"><T k="home.heroSub" /></p>
           <div className="flex gap-2">
-            <Button size="lg" render={<Link href="/search" />}><T k="home.shop" /> <ArrowRight className="size-4" /></Button>
-            <Button size="lg" variant="outline" render={<Link href="/search?sort=rating" />}><T k="search.sorts.rating" /></Button>
+            <Button size="lg" nativeButton={false} render={<Link href="/search" />}><T k="home.shop" /> <ArrowRight className="size-4" /></Button>
+            <Button size="lg" variant="outline" nativeButton={false} render={<Link href="/search?sort=rating" />}><T k="search.sorts.rating" /></Button>
           </div>
         </div>
         {hero?.images[0] && (

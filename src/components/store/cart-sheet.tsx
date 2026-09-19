@@ -34,7 +34,7 @@ export function CartSheet({ cart }: { cart: Cart }) {
               {cart.discountCents > 0 && <Row label={t.cart.discount} value={`- ${money(cart.discountCents)}`} />}
               <Row label={t.cart.shipping} value={cart.shippingCents === 0 ? t.cart.free : money(cart.shippingCents)} />
               <Row label={t.cart.total} value={money(cart.totalCents)} bold />
-              <Button className="mt-2 w-full" render={<Link href="/cart" />}>{t.cart.checkout}</Button>
+              <Button className="mt-2 w-full" nativeButton={false} render={<Link href="/cart" />}>{t.cart.checkout}</Button>
             </div>
           </>
         )}
